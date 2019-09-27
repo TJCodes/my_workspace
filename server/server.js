@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import express from 'express';
 const spaceti = require('./src/recommendation');
+const beringar;
 require('dotenv').config();
 
 const app = new express();
