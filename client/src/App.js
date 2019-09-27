@@ -4,6 +4,9 @@ import Recommend from './pages/recommend';
 import Navbar from './components/Navbar/navbar';
 import './App.css';
 
+import axios from 'axios';
+require('dotenv').config();
+
 class App extends React.Component {
   constructor() {
     super();
@@ -14,8 +17,6 @@ class App extends React.Component {
       accessibiliy: false,
       profile: false,
     } 
-
-    // this.state = this.state.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,12 @@ class App extends React.Component {
         break;
       default:
     }
+
+    const apiCall = () => {
+      axios.post();
+    }
+
+    console.log(process.env.SPACETI_API_EMAIL);
   }
 
   componentDidUpdate() {

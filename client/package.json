@@ -4,6 +4,7 @@
   "private": true,
   "main": "App.js",
   "dependencies": {
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "concurrently": "^4.1.2",
     "dotenv": "^8.1.0",
@@ -13,13 +14,18 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "request": "^2.88.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node -r esm src/server.js",
+    "dev": "concurrently \"npm start\" \"npm run server\""
   },
   "proxy": "http://localhost:8000",
   "eslintConfig": {

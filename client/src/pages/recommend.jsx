@@ -1,4 +1,5 @@
 import React from 'react';
+import {apiCall} from '../api/recommendation';
 
 const recommend = (props) => (
     <div id="wrapper-recommend" className="show">
@@ -14,7 +15,7 @@ const recommend = (props) => (
                         <option value="2f office space">2F Office Space</option>
                     </select>
                     <br />
-                    <button type="submit" className="btn btn-primary smallMarginTop">submit</button>
+                    <button type="submit" className="btn btn-primary smallMarginTop" onClick={apiCall()}>submit</button>
                 </form>
             </div>
         </div>
