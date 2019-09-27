@@ -43,7 +43,7 @@ class App extends React.Component {
       axios.post();
     }
 
-    console.log(process.env.SPACETI_API_EMAIL);
+    console.log(process.env.REACT_APP_SPACETI_API_EMAIL);
   }
 
   componentDidUpdate() {
