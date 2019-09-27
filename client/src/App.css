@@ -1,0 +1,123 @@
+.App {
+  background-color: #2E2E2E;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  font-family: 'helvetica neue', helvetica, sans-serif;
+}
+
+h1 {
+  font-weight: 200;
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+h3 {
+  font-weight: 300;
+} */
+
+p {
+  font-weight: 200;
+  font-size: 14px;
+}
+
+div {
+  width: 100%;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.25);
+  padding: 3em;
+  width: 12em;
+  text-align: center;
+}
+
+.btn {
+  font-variant: small-caps;
+  font-weight: 800;
+  padding: 0.3em 2em 0.5em 2em;
+  font-size: 1em;
+}
+
+.smallMarginTop {
+  margin-top:  1.5em;
+}
+
+.mediumMarginTop {
+  margin-top: 2.5em;
+}
+
+.largeMarginTop {
+  margin-top: 5em;
+}
+
+.my-btn {
+  width: 10em;
+  border-style: none;
+  border-radius: 5%;
+  background-color: #33E38B;
+  font-variant: small-caps;
+  font-size: 14px;
+  padding: 0;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.generalMargin {
+  margin-top: 25vh;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#logoRow {
+  margin-bottom: 1em;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.active {
+  color: #33E38B !important;
+  transition-duration: 1s;
+}
+
+.row-find {
+  margin-top: 10vh;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+}
+
+#findText {
+  font-variant: small-caps;
+  color: #33E38B;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+#findText:hover {
+  cursor: pointer;
+  color: #24a765;
+  transition-duration: 0.3s;
+}
+
+.hide {
+  display: none;
+  transition-duration: 1s;
+}
+
+.show {
+  display: block;
+  transition-duration: 1s;
+}
+

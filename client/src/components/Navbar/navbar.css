@@ -1,0 +1,37 @@
+  /* DESKTOP CSS STARTS HERE */
+
+.navigation-container {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .navigation {
+    width: 100%;
+  }
+  
+  .navigation-item {
+    display: inline-block;
+    margin: 1em 2em 0 2em;
+    color: white;
+    font-variant: small-caps;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+  }
+  
+  .navigation-item:hover {
+    color: #24a765;
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+
+  /* DESKTOP CSS ENDS HERE */
+  
+  
+  
+  /* MOBILE CSS STARTS HERE */
+  
+  @media only screen and (max-width: 768px) {
+      
+  }
+
+   /* MOBILE CSS ENDS HERE */
