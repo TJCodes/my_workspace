@@ -1,5 +1,5 @@
 import React from 'react';
-import {apiCall} from '../api/recommendation';
+import {apiCall, comparison} from '../api/recommendation';
 
 const recommend = (props) => (
     <div id="wrapper-recommend" className="show">

@@ -24,5 +24,3 @@ mongoose.connect('mongodb+srv://' + process.env.MDB_USERNAME + ':' + process.env
 mongoose.connection.on('connected', () => {console.log('Connected to the DB')});
 mongoose.connection.on('error', (err) => {console.log(err)});
 mongoose.connection.on('disconnected', () => {console.log('Disconnected from the DB')});
-
-spaceti.apiCall();
