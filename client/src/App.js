@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
 import Recommend from './pages/recommend';
+import { sensors } from './storage/sensors';
 import Navbar from './components/Navbar/navbar';
 import './App.css';
 
@@ -16,6 +17,11 @@ class App extends React.Component {
       record: false,
       accessibiliy: false,
       profile: false,
+      recommendation: {
+        warm: false,
+        loud: false,
+        natural: false
+      }
     } 
   }
 
@@ -39,11 +45,7 @@ class App extends React.Component {
       default:
     }
 
-    const apiCall = () => {
-      axios.post();
-    }
-
-    console.log(process.env.REACT_APP_SPACETI_API_EMAIL);
+    console.log(sensors.Spaceti.Chair_Stone.UM1.s175);
   }
 
   componentDidUpdate() {
@@ -86,12 +88,32 @@ class App extends React.Component {
     }
   }
 
+  next = () => {
+    console.log('next');
+  }
+
+  questions = {
+    warm: () => {
+      this.setState({recommendation: {warm: !this.state.recommendation.warm}});
+    },
+    loud: () => {
+      this.setState({recommendation: {loud: !this.state.recommendation.loud}});
+    },
+    natural: () => {
+      this.setState({recommendation: {loud: this.state.recommendation.natural}});
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <Navbar></Navbar>
         <Home homeState={this.state.home}></Home>
-        <Recommend></Recommend>
+        <Recommend 
+        changeWarmState = {this.questions.warm}
+        changeLoudState = {this.questions.loud}
+        changeNaturalState = {this.questions.natural}
+        next ={this.next}></Recommend>
       </div>
     );
   }
