@@ -1,8 +1,6 @@
 import React from 'react';
 import { apiCall } from '../api/recommendation';
-import { sensors } from '../storage/sensors';
-
-let warm = false;
+import { storageCall } from '../api/recommendation';
 
 export const recommend = (props) => (
     <div id="wrapper-recommend" className="show">
@@ -10,14 +8,16 @@ export const recommend = (props) => (
             <div className="centerText">
                 <h1>Where are you currently working?</h1>
                 <select id="workspace" name="workspace" className="mediumMarginTop">
-                    <option value="lg">Lower ground</option>
-                    <option value="upper mezz">Upper Mezz</option>
-                    <option value="um1">UM1</option>
-                    <option value="um2">UM2</option>
-                    <option value="2fo">2F Office Space</option>
+                    <option value="LG2">LG2</option>
+                    <option value="LG3">LG3</option>
+                    <option value="LG4">LG4</option>
+                    <option value="UM">Upper Mezz</option>
+                    <option value="UM1">UM1</option>
+                    <option value="UM2">UM2</option>
+                    <option value="SecondFloor">2F Office Space</option>
                 </select>
                 <br />
-                <button type="submit" className="btn btn-primary smallMarginTop" onClick={() => { apiCall(); props.next(); }}>submit</button>
+                <button type="submit" className="btn btn-primary smallMarginTop" onClick={() => { apiCall(document.getElementById('workspace').value); props.next(); storageCall()}}>submit</button>
             </div>
         </div>
 
@@ -28,7 +28,7 @@ export const recommend = (props) => (
             </div>
         </div>
             <div className="centerText largeMarginTop">
-                <h1 id="warmer" onClick={warm = true}>warmer</h1>
+                <h1 id="warmer">warmer</h1>
                 <h1 id="cooler">cooler</h1>
             </div>
         </div>

@@ -987,13 +987,13 @@ let s118 = {
     working: true
 };
 
-let s119 = {
-    sensor_id: 119,
-    manufacturer: "spaceti",
-    location: "2fo-r",
-    type: "chair stone",
-    working: true
-};
+// let s119 = {
+//     sensor_id: 119,
+//     manufacturer: "spaceti",
+//     location: "2fo-r",
+//     type: "chair stone",
+//     working: true
+// };
 
 let s159 = {
     sensor_id: 159,
@@ -1109,16 +1109,14 @@ let s138 = {
 
 //END OF 2ND FLOOR SENSORS
 
-const schema = {
+//eslint-disable-next-line
+const schema = { //Use this as a template to define a new sensor objects
     sensor_id: Number,
     manufacturer: "",
     location: "",
     type: "",
     working: Boolean
 }
-
-//FINISHED LG. MOVE ONTO UM
-// ADD SENSORS FROM LG INTO SENSORS OBJECT
 
 export const sensors = {
     Spaceti: {
@@ -1222,7 +1220,6 @@ export const sensors = {
                         s135,
                         s96,
                         s97,
-                        s98,
                         s98, //10
                         s99,
                         s100,
@@ -1253,6 +1250,7 @@ export const sensors = {
                         s77,
                         s78,
                         s79,
+                        s120,
                         s121, //40
                         s122,
                         s123,
@@ -1272,12 +1270,18 @@ export const sensors = {
                         s111,
                         s112,
                         s113,
-                        s113,
+                        s114,
                         s115,
                         s116,
                         s117,
                         s118,
-                        s119,
+                        s119: {
+                            sensor_id: 119,
+                            manufacturer: "spaceti",
+                            location: "2fo-r",
+                            type: "chair stone",
+                            working: true
+                        }
                     },
                 },
                 Workspace: {
@@ -1303,12 +1307,8 @@ export const sensors = {
             },
         
             UM: {
-                Left: {
-                    s204
-                },
-                Right: {
+                    s204,
                     s203
-                }
             },
         
             UM1: {

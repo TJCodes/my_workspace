@@ -1,6 +1,62 @@
 import request from 'request';
+import { sensors } from '../storage/sensors';
 
-export const apiCall = () => {
+export const storageCall = () => {
+    let workspace = document.getElementById('workspace').value;
+    let sensor;
+
+    switch (true) {
+        case (workspace === 'LG2'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.LG2)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'LG3'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.LG3)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'LG4'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.LG4)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'UM'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.UM)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'UM1'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.UM1)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'UM2'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.UM2)[0];
+            console.log(sensor.sensor_id);
+            break;
+        case (workspace === 'SecondFloor'):
+            console.log(workspace);
+            sensor = Object.values(sensors.Spaceti.Smart_Stone.SecondFloor)[0];
+            console.log(sensor.sensor_id);
+            break;
+    }
+
+    let i;
+
+    for (i = 0; i < test.length; i++){
+      if (test[i].sensor_id === 1558) {
+        console.log('sensor found');
+        break;
+      }
+      else if (i === test.length - 1 && test[i].sensor_id !== 1558) {
+        console.log('not found bro');
+      }
+    }
+}
+
+export const apiCall = (value) => {
     request.post(process.env.REACT_APP_SPACETI_API_WEBSITE_LOGIN + process.env.REACT_APP_SPACETI_API_EMAIL + "&password=" + process.env.REACT_APP_SPACETI_API_PASSWORD, (error, response, body) => {
         if (error) {
             return console.log(error);
@@ -35,8 +91,6 @@ export const apiCall = () => {
                         }
                     }
 
-                    //TODO - GO THROUGH MDB DATABASE AND ADD ID FIELD
-
                     //TODO - GRAB THE SENSOR FROM CURRENT ROOM THEY ARE IN
 
                     //TODO - CHANGE STATE DEPENDING ON ANSWERS FROM 3 QUESTIONS
@@ -56,22 +110,6 @@ export const apiCall = () => {
             }
 
             request.post(options_spaceti, callback);
-
-            request.get('https://cloud.mongodb.com/v2/5d83872879358e6f2a1dd462#metrics/replicaSet/5d8388e08598c61924fac778/explorer/test/sensors/')
-            .on('response', function(response) {
-                console.log(response.statusCode); // 200
-                console.log(response.headers['content-type']) // 'image/png'
-  })
-
-            let workspace = document.getElementById('workspace').value;
-
-            let options_mdb = {
-                url: process.env.REACT_APP_SPACETI_API_SMART
-                    + currentDate,
-                headers: {
-                    'Authorization': 'Basic ' + token
-                }
-            };
         }
     });
 }

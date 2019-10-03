@@ -5,7 +5,6 @@ import { sensors } from './storage/sensors';
 import Navbar from './components/Navbar/navbar';
 import './App.css';
 
-import axios from 'axios';
 require('dotenv').config();
 
 class App extends React.Component {
@@ -22,7 +21,7 @@ class App extends React.Component {
         loud: false,
         natural: false
       }
-    } 
+    }
   }
 
   componentDidMount() {
@@ -45,10 +44,27 @@ class App extends React.Component {
       default:
     }
 
-    console.log(sensors.Spaceti.Chair_Stone.UM1.s175);
+    const test = Object.values(sensors.Spaceti.Chair_Stone.LG1);
+    let i;
+
+    let value = document.getElementById('workspace').value;
+
+    for (i = 0; i < test.length; i++) {
+      if (test[i].sensor_id === 158) {
+        console.log('sensor found');
+        break;
+      }
+      else if (i === test.length - 1 && test[i].sensor_id !== 158) {
+        console.log('not found bro');
+      }
+    }
+
+    // console.log(value)
+    // console.log(value);
   }
 
   componentDidUpdate() {
+    //Switch statement to check which page state is false and remove it.
     switch (false) {
       case this.state.home:
         document.getElementById('wrapper-home').style.opactity = 0;
@@ -68,6 +84,7 @@ class App extends React.Component {
       default:
     }
 
+    //Switch statement to check which page state is true and display it.
     switch (true) {
       case this.state.home:
 
@@ -76,32 +93,47 @@ class App extends React.Component {
 
         break;
       case this.state.record:
-        
+
         break;
       case this.state.accessibiliy:
-        
+
         break;
       case this.state.profile:
-        
+
         break;
       default:
     }
   }
 
   next = () => {
-    console.log('next');
+    this.setState ({home: !this.state.home})
   }
 
-  questions = {
-    warm: () => {
-      this.setState({recommendation: {warm: !this.state.recommendation.warm}});
-    },
-    loud: () => {
-      this.setState({recommendation: {loud: !this.state.recommendation.loud}});
-    },
-    natural: () => {
-      this.setState({recommendation: {loud: this.state.recommendation.natural}});
-    }
+  changeWarm = () => {
+    this.setState({
+      recommendation: {
+        ...this.state.recommendation,
+        warm: !this.state.recommendation.warm
+      }
+    });
+  }
+
+  changeLoud = () => {
+    this.setState({
+      recommendation: {
+        ...this.state.recommendation,
+        loud: !this.state.recommendation.loud
+      }
+    });
+  }
+
+  changeNatural = () => {
+    this.setState({
+      recommendation: {
+        ...this.state.recommendation,
+        natural: !this.state.recommendation.natural
+      }
+    });
   }
 
   render() {
@@ -109,11 +141,13 @@ class App extends React.Component {
       <div className="App">
         <Navbar></Navbar>
         <Home homeState={this.state.home}></Home>
-        <Recommend 
-        changeWarmState = {this.questions.warm}
-        changeLoudState = {this.questions.loud}
-        changeNaturalState = {this.questions.natural}
-        next ={this.next}></Recommend>
+        <Recommend
+          changeState={this.questions}
+          changeWarm={this.changeWarm}
+          changeLoud={this.changeLoud} 
+          changeNatural={this.changeNatural} 
+          changeMyState={this.changeMyState}
+          next={this.next}></Recommend>
       </div>
     );
   }
