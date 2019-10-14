@@ -1,11 +1,12 @@
 import React from 'react';
 import Home from './pages/home';
 import Recommend from './pages/recommend';
-import { sensors } from './storage/sensors';
 import Navbar from './components/Navbar/navbar';
 import './App.css';
 
 require('dotenv').config();
+
+//TODO - next() FUNCTION NEEDS TO LOAD NEXT PAGE USING REACT-FADE-OPACITIY PACKAGE
 
 class App extends React.Component {
   constructor() {
@@ -27,40 +28,32 @@ class App extends React.Component {
   componentDidMount() {
     switch (true) {
       case this.state.home:
-        document.getElementById('navbar-home').classList.add('active');
+        setTimeout(function () {
+          document.getElementById('navbar-home').classList.add('active');
+        }, 1000);
         break;
       case this.state.recommend:
-        document.getElementById('navbar-recommend').classList.add('active');
+        setTimeout(function () {
+          document.getElementById('navbar-recommend').classList.add('active');
+        }, 1000);
         break;
       case this.state.record:
-        document.getElementById('navbar-record').classList.add('active');
+        setTimeout(function () {
+          document.getElementById('navbar-record').classList.add('active');
+        }, 1000);
         break;
       case this.state.accessibiliy:
-        document.getElementById('navbar-accessibility').classList.add('active');
+        setTimeout(function () {
+          document.getElementById('navbar-accessibility').classList.add('active');
+        }, 1000);
         break;
       case this.state.profile:
-        document.getElementById('navbar-profile').classList.add('active');
+        setTimeout(function () {
+          document.getElementById('navbar-profile').classList.add('active');
+        }, 1000);
         break;
       default:
     }
-
-    const test = Object.values(sensors.Spaceti.Chair_Stone.LG1);
-    let i;
-
-    let value = document.getElementById('workspace').value;
-
-    for (i = 0; i < test.length; i++) {
-      if (test[i].sensor_id === 158) {
-        console.log('sensor found');
-        break;
-      }
-      else if (i === test.length - 1 && test[i].sensor_id !== 158) {
-        console.log('not found bro');
-      }
-    }
-
-    // console.log(value)
-    // console.log(value);
   }
 
   componentDidUpdate() {
@@ -106,7 +99,31 @@ class App extends React.Component {
   }
 
   next = () => {
-    this.setState ({home: !this.state.home})
+    let questions = ['q1', 'q2', 'q3', 'q4', 'rec'];
+    let wrapper = document.getElementById('wrapper-recommend');
+
+    console.log('next question');
+
+    switch (true) {
+      case wrapper.childNodes[0].hidden === false:
+        wrapper.childNodes[0].hidden = true;
+        wrapper.childNodes[1].hidden = false;
+        break;
+      case wrapper.childNodes[1].hidden === false:
+        wrapper.childNodes[1].hidden = true;
+        wrapper.childNodes[2].hidden = false;
+        break;
+      case wrapper.childNodes[2].hidden === false:
+        wrapper.childNodes[2].hidden = true;
+        wrapper.childNodes[3].hidden = false;
+        break;
+      case wrapper.childNodes[3].hidden === false:
+        wrapper.childNodes[3].hidden = true;
+        wrapper.childNodes[4].hidden = false;
+        break;
+    }
+
+
   }
 
   changeWarm = () => {
@@ -144,10 +161,11 @@ class App extends React.Component {
         <Recommend
           changeState={this.questions}
           changeWarm={this.changeWarm}
-          changeLoud={this.changeLoud} 
-          changeNatural={this.changeNatural} 
+          changeLoud={this.changeLoud}
+          changeNatural={this.changeNatural}
           changeMyState={this.changeMyState}
-          next={this.next}></Recommend>
+          next={this.next}
+          conditions={this.conditions}></Recommend>
       </div>
     );
   }
