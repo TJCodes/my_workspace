@@ -14,10 +14,9 @@ class navbar extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(function() {
-            console.log('mounted');
-            // document.getElementById('navbar-home').classList.add('active');
-        }, 1000);
+        // setTimeout(function() {
+        //     document.getElementById('navbar-home').classList.add('active');
+        // }, 1000);
     }
 
     render() {

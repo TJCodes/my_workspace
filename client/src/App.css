@@ -121,3 +121,101 @@ select {
   transition-duration: 1s;
 }
 
+#warmer {
+  width: fit-content;
+  color: #df9b73;
+  margin-left: 25%;
+  float: left;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  transition-duration: 0.5s;
+}
+
+#warmer:hover {
+  cursor: pointer;
+  transition-duration: 0.5s;
+  color: #be7951;
+}
+
+#cooler {
+  width: fit-content;
+  color: #6999e7;
+  margin-right: 25%;
+  float: right;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  transition-duration: 0.5s;
+}
+
+#cooler:hover {
+  cursor: pointer;
+  transition-duration: 0.5s;
+  color: #4776c2;
+}
+
+#louder {
+  width: fit-content;
+  margin-left: 25%;
+  float: left;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  font-weight: 500;
+  transition-duration: 0.5s;
+}
+
+#louder:hover {
+  cursor: pointer;
+  transition-duration: 0.25s;
+}
+
+#quieter {
+  width: fit-content;
+  margin-right: 25%;
+  float: right;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  transition-duration: 0.5s;
+}
+
+#quieter:hover {
+  cursor: pointer;
+  transition-duration: 0.25s;
+}
+
+#natural {
+  width: fit-content;
+  color: #fff5be;
+  margin-left: 25%;
+  float: left;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  font-weight: 500;
+  transition-duration: 0.5s;
+}
+
+#natural:hover {
+  cursor: pointer;
+  transition-duration: 0.5s;
+  color: #fce5a5;
+}
+
+#artificial {
+  width: fit-content;
+  color: #fffddf;
+  margin-right: 25%;
+  float: right;
+  font-size: 3.5em;
+  font-variant: small-caps;
+  transition-duration: 0.5s;
+}
+
+#artificial:hover {
+  cursor: pointer;
+  transition-duration: 0.5s;
+  color: #ffffef;
+}
+
+#q2 {
+  opacity: 50%;
+  transition-duration: 1s;
+}
