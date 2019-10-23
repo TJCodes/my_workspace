@@ -1180,7 +1180,7 @@ let s187 = {
 };
 
 let s141 = {
-    sensor_id: 204,
+    sensor_id: 141,
     manufacturer: "spaceti",
     location: "2fo-l",
     type: "smart stone",

@@ -1,11 +1,18 @@
 import React from 'react';
-import { apiCall, checkTemp, checkLoud, storageCallSpaceti, storageCallBeringar, conditions, storeRoom, storeTemp } from '../api/recommendation';
-import Fade from 'react-fade-opacity';
+import {
+    checkTempPromise,
+    checkLoudPromise,
+    checkNaturalPromise,
+    storageCallSpaceti,
+    conditions,
+    storeRoom,
+    calculateRec,
+} from '../api/recommendation';
 
 //FINISH OFF FADE
 
 export const recommend = (props) => (
-    <div id="wrapper-recommend" className="show">
+    <div id="wrapper-recommend">
         <div id="q1" className="row generalMargin">
             <div className="centerText">
                 <h1>Where are you currently working?</h1>
@@ -33,8 +40,8 @@ export const recommend = (props) => (
             </div>
 
             <div className="centerText largeMarginTop">
-                <h1 id="warmer" onClick={() => { props.next(); conditions.Warmer = true; conditions.Cooler = false; storageCallSpaceti(); checkTemp(); }}>warmer</h1>
-                <h1 id="cooler" onClick={() => { props.next(); conditions.Warmer = false; conditions.Cooler = true; storageCallSpaceti(); checkTemp(); }}>cooler</h1>
+                <h1 id="warmer" onClick={() => { conditions.Warmer = true; conditions.Cooler = false; storageCallSpaceti(); checkTempPromise().then(props.next); }}>warmer</h1>
+                <h1 id="cooler" onClick={() => { conditions.Warmer = false; conditions.Cooler = true; storageCallSpaceti(); checkTempPromise().then(props.next); }}>cooler</h1>
             </div>
         </div>
 
@@ -46,8 +53,8 @@ export const recommend = (props) => (
             </div>
 
             <div className="centerText largeMarginTop">
-                <h1 id="louder" onClick={() => { props.next(); conditions.Louder = true; conditions.Quieter = false; checkLoud(); }}>louder</h1>
-                <h1 id="quieter" onClick={() => { props.next(); conditions.Louder = false; conditions.Quieter = true; checkLoud(); }}>quieter</h1>
+                <h1 id="louder" onClick={() => { conditions.Louder = true; conditions.Quieter = false; checkLoudPromise().then(props.next); }}>louder</h1>
+                <h1 id="quieter" onClick={() => { conditions.Louder = false; conditions.Quieter = true; checkLoudPromise().then(props.next); }}>quieter</h1>
             </div>
         </div>
 
@@ -59,15 +66,15 @@ export const recommend = (props) => (
             </div>
 
             <div className="centerText largeMarginTop">
-                <h1 id="natural" onClick={() => { props.next(); conditions.Natural = true; conditions.Artificial = false; }}>natural</h1>
-                <h1 id="artificial" onClick={() => { props.next(); conditions.Natural = false; conditions.Artificial = true; }}>artificial</h1>
+                <h1 id="natural" onClick={() => { props.next(); conditions.Natural = true; conditions.Artificial = false; checkNaturalPromise().then(calculateRec()); }}>natural</h1>
+                <h1 id="artificial" onClick={() => { props.next(); conditions.Natural = false; conditions.Artificial = true; checkNaturalPromise().then(calculateRec()); }}>artificial</h1>
             </div>
         </div>
 
         <div id="rec" className="row generalMargin" hidden>
             <div className="row">
                 <div className="centerText">
-                    <h1>Your recommended room is -</h1>
+                    <h1 id="recommendedRoom">Your recommended room is -</h1>
                 </div>
             </div>
         </div>
