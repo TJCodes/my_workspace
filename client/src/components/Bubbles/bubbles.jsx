@@ -2,7 +2,7 @@ import React from 'react';
 import './bubbles.css';
 
 const Bubbles = () => (
-    <ul id="bubbles">
+    <ul id="bubbles" hidden>
         <li className="bubble-big"></li>
         <li className="bubble-big"></li>
         <li className="bubble-big"></li>

@@ -106,7 +106,6 @@ select {
   font-variant: small-caps;
   color: #33E38B;
   transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
   margin: 0 auto;
   padding: 5px;
 }
@@ -243,4 +242,16 @@ select {
   position: absolute;
   opacity: 0;
   transition-duration: 1s;
+}
+
+#notWorking {
+  opacity: 0;
+  transition-duration: 0.5s;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+#notWorkingDiv {
+  text-align: center;
+  width: 100%;
+  margin-top: 1.5em;
 }

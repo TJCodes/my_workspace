@@ -1,6 +1,7 @@
 import request from 'request';
-import { sensors } from '../storage/sensors';
-import { beringarArray } from '../storage/sensors';
+import { sensors, beringarArray, spacetiArray } from '../storage/sensors';
+import { historical } from '../storage/historical';
+let chosenOne = [];
 let sensorSpaceti = [];
 let sensorBeringar;
 let currentTemp;
@@ -9,6 +10,8 @@ let suggestions = [];
 export let locationSuggestions = [];
 let workspace;
 let rec;
+let rooms;
+let checkSensor;
 export let mode;
 
 export let conditions = {
@@ -23,10 +26,293 @@ export let conditions = {
 export const storeRoom = () => {
     workspace = document.getElementById('workspace').value;
     rec = workspace.toLowerCase();
+    rooms = document.getElementById('workspace').options;
+    // for (let i = 0; i < rooms.length; i++) {
+    //     if 
+    // }
 }
 
-export const storageCallBeringar = () => {
+export const checkWorking = () => {
+    let token;
 
+    return new Promise((resolve, reject) => {
+
+        return new Promise((resolve, reject) => {
+            let options = {
+                url: 'https://fcc.spaceti.net/login/password?email=' + process.env.REACT_APP_SPACETI_API_EMAIL + '&password=' + process.env.REACT_APP_SPACETI_API_PASSWORD
+            }
+
+            let callback = (error, response, body) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    document.getElementById('spinner').hidden = false;
+                    setTimeout(() => {
+                        document.getElementById('spinner').style.opacity = 1;
+                    }, 100);
+
+                    let info = JSON.parse(body);
+                    resolve(token = (Buffer.from('token:' + info.token).toString('base64')));
+                }
+            }
+
+            request.post(options, callback);
+        }).then(() => {
+            return new Promise((resolve, reject) => {
+                let currentDate = new Date();
+
+                currentDate = currentDate.toISOString();
+                currentDate = currentDate.substring(0, currentDate.length - 1);
+
+                let options = {
+                    url: process.env.REACT_APP_SPACETI_API_SMART + currentDate + '000Z',
+                    headers: {
+                        'Authorization': 'Basic ' + token
+                    }
+                }
+
+                let callback = (error, response, body) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        let info = JSON.parse(body);
+
+                        for (let i = 0; i < spacetiArray.length; i++) {
+                            for (let l = 0; l < info.length; l++) {
+                                if (info[l].stone_id === spacetiArray[i].sensor_id) {
+                                    spacetiArray[i].working = true;
+                                    console.log(spacetiArray[i].sensor_id + ' is working');
+                                }
+                            }
+                            if (i === spacetiArray.length - 1) {
+                                resolve(console.log('resolved'));
+                            }
+                        }
+                    }
+                }
+
+                request.post(options, callback);
+
+            }).then(() => {
+
+                let entries = Object.entries(sensors.Spaceti.Smart_Stone);
+                switch (true) {
+                    case (document.getElementById('workspace').value === 'Basement'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        }, 500);
+                        break;
+                    case (document.getElementById('workspace').value === 'LG1'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        }, 500);
+                        break;
+                    case (document.getElementById('workspace').value === 'LG2'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[1][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[1][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'LG3'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[2][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[2][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'LG4'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[3][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[3][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'Cafe'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        }, 500);
+                        break;
+                    case (document.getElementById('workspace').value === 'LM'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        }, 500);
+                        break;
+                    case (document.getElementById('workspace').value === 'UM'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[4][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[4][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'UM1'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[5][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[5][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'UM2'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[6][1])[0].working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[6][1])[0].working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'SecondFloor.Sekforde'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[7][1])[0].Sekforde.s136.working === false &&
+                            Object.values(entries[7][1])[0].Sekforde.s137.working === false &&
+                            Object.values(entries[7][1])[0].Sekforde.s138.working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[7][1])[0].Sekforde.s136.working === true ||
+                            Object.values(entries[7][1])[0].Sekforde.s137.working === true ||
+                            Object.values(entries[7][1])[0].Sekforde.s138.working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'SecondFloor.Middle'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[7][1])[0].Middle.s142.working === false &&
+                            Object.values(entries[7][1])[0].Middle.s143.working === false &&
+                            Object.values(entries[7][1])[0].Middle.s139.working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[7][1])[0].Middle.s142.working === true ||
+                            Object.values(entries[7][1])[0].Middle.s143.working === true ||
+                            Object.values(entries[7][1])[0].Middle.s139.working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === 'SecondFloor.StJames'):
+                        document.getElementById('spinner').hidden = false;
+                        document.getElementById('spinner').style.opacity = 1;
+                        setTimeout(() => {
+                            document.getElementById('spinner').hidden = true;
+                            document.getElementById('spinner').style.opacity = 0;
+                        }, 500);
+                        if (Object.values(entries[7][1])[0].StJames.s141.working === false) {
+                            document.getElementById('notWorking').innerHTML = 'Sorry, not all of the sensors here are not currently responding, however, we can use historical data to recommend you a workspace!';
+                            document.getElementById('notWorkingDiv').hidden = false;
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorking').style.opacity = 1 }, 100);
+                        } else if (Object.values(entries[7][1])[0].StJames.s141.working === true) {
+                            document.getElementById('notWorking').style.opacity = 0;
+                            setTimeout(() => { document.getElementById('notWorkingDiv').hidden = true; document.getElementById('notWorking').innerHTML = ''; }, 500);
+                        }
+                        break;
+                    case (document.getElementById('workspace').value === '2fw'):
+                        break;
+                }
+            });
+        });
+
+    });
 }
 
 export const storageCallSpaceti = () => {
@@ -58,8 +344,8 @@ export const storageCallSpaceti = () => {
             sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.UM2)[0]);
             console.log(sensorSpaceti);
             break;
-        case (workspace === 'SecondFloor.Left'):
-            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Left)[0]);
+        case (workspace === 'SecondFloor.StJames'):
+            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.StJames)[0]);
             console.log(sensorSpaceti);
             break;
         case (workspace === 'SecondFloor.Middle'):
@@ -68,10 +354,10 @@ export const storageCallSpaceti = () => {
             sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Middle)[2]);
             console.log(sensorSpaceti);
             break;
-        case (workspace === 'SecondFloor.Right'):
-            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Right)[0]);
-            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Right)[1]);
-            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Right)[2]);
+        case (workspace === 'SecondFloor.Sekforde'):
+            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Sekforde)[0]);
+            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Sekforde)[1]);
+            sensorSpaceti.push(Object.values(sensors.Spaceti.Smart_Stone.SecondFloor.Office.Sekforde)[2]);
             console.log(sensorSpaceti);
             break;
     }
@@ -82,7 +368,7 @@ export const calculateRec = () => {
     let curValue;
 
     for (let i = 0; i < locationSuggestions.length; i++) {
-        if (rec === 'secondfloor.left' || rec === 'secondfloor.middle' || rec === 'secondfloor.right') {
+        if (rec === 'secondfloor.stjames' || rec === 'secondfloor.middle' || rec === 'secondfloor.sekforde') {
             rec = '2fo';
             if (locationSuggestions[i].substring(0, 3) !== rec) {
                 mode = locationSuggestions[i];
@@ -118,10 +404,10 @@ export const calculateRec = () => {
     if (mode) {
         switch (true) {
             case (mode === '2fo-l'):
-                document.getElementById('recommendedRoom').innerHTML = "Your recommended room is the Second Floor Office. <i>The left side particularly meets your needs!</i>";
+                document.getElementById('recommendedRoom').innerHTML = "Your recommended room is the Second Floor Office. <i>The St. James Street side of the room particularly meets your needs!</i>";
                 break;
             case (mode === '2fo-r'):
-                document.getElementById('recommendedRoom').innerHTML = "Your recommended room is the Second Floor Office. <i>The right side particularly meets your needs!</i>";
+                document.getElementById('recommendedRoom').innerHTML = "Your recommended room is the Second Floor Office. <i>The Sekforde Street side particularly meets your needs!</i>";
                 break;
             case (mode === '2fo-m'):
                 document.getElementById('recommendedRoom').innerHTML = "Your recommended room is the Second Floor Office. <i>The middle of the room particularly meets your needs!</i>";
@@ -134,12 +420,73 @@ export const calculateRec = () => {
     }
 }
 
+export const getCurrentConditions = () => {
+    let token;
+    let currentDate = new Date();
+    currentDate = currentDate.toISOString();
+    currentDate = currentDate.substring(0, currentDate.length - 1);
+
+    const getCurrentTemp = new Promise((resolve, reject) => {
+        let options = {
+            url: process.env.REACT_APP_SPACETI_API_WEBSITE_LOGIN + process.env.REACT_APP_SPACETI_API_EMAIL + "&password=" + process.env.REACT_APP_SPACETI_API_PASSWORD,
+        };
+
+        let callback = (error, response, body) => {
+            if (error) {
+                console.log(error);
+            } else {
+                let info = JSON.parse(body);
+                let token = (Buffer.from('token:' + info.token).toString('base64'));
+
+                resolve(token = (Buffer.from('token:' + info.token).toString('base64')));
+            }
+        }
+
+        request.post(options, callback);
+    });
+
+    getCurrentTemp.then(() => {
+        let options = {
+            url: process.env.REACT_APP_SPACETI_API_SMART + currentDate + '000Z',
+            headers: {
+                'Authorization': 'Basic ' + token
+            }
+        };
+
+        let callback = (error, response, body) => {
+            if (error) {
+                console.log(error);
+            } else {
+                let info = JSON.parse(body);
+
+                for (let i = 0; i < info.length; i++) {
+                    for (let l = 0; l < sensorSpaceti.length; l++) {
+                        if (info[i].stone_id === sensorSpaceti[l].sensor_id) {
+                            chosenOne.push(info[i]);
+                        }
+                    }
+                }
+
+                if (chosenOne[0]) {
+                    currentTemp = chosenOne[0].temp;
+                } // FINISH THIS - ADD ELSE STATEMENT TO SET THE CURRENT TEMP TO HISTORICAL TEMPERATURE
+            }
+        }
+
+        request,post(options, callback);
+    });
+
+    const getCurrentNoise = new Promise((resolve, reject) => {
+
+    });
+}
+
 export const checkTempPromise = () => {
     return new Promise((resolve, reject) => {
         document.getElementById('spinner').hidden = false;
         setTimeout(() => {
             document.getElementById('spinner').style.opacity = 1;
-        }, 100)
+        }, 100);
 
         request.post(process.env.REACT_APP_SPACETI_API_WEBSITE_LOGIN + process.env.REACT_APP_SPACETI_API_EMAIL + "&password=" + process.env.REACT_APP_SPACETI_API_PASSWORD, (error, response, body) => {
             if (error) {
@@ -207,11 +554,11 @@ export const checkTempPromise = () => {
                             if (i !== 7 && suggestions.includes(Object.values(entries[i][1])[0].sensor_id)) {
                                 locationSuggestions.push(Object.values(entries[i][1])[0].location);
                             } else if (i === 7) {
-                                if (suggestions.includes(Object.values(entries[i][1])[0].Left.s141.sensor_id)) {
-                                    locationSuggestions.push(Object.values(entries[i][1])[0].Left.s141.location);
+                                if (suggestions.includes(Object.values(entries[i][1])[0].StJames.s141.sensor_id)) {
+                                    locationSuggestions.push(Object.values(entries[i][1])[0].StJames.s141.location);
                                 }
-                                if (suggestions.includes(Object.values(entries[i][1])[0].Left.s141.sensor_id)) {
-                                    locationSuggestions.push(Object.values(entries[i][1])[0].Left.s141.location);
+                                if (suggestions.includes(Object.values(entries[i][1])[0].StJames.s141.sensor_id)) {
+                                    locationSuggestions.push(Object.values(entries[i][1])[0].StJames.s141.location);
                                 }
                                 if (suggestions.includes(Object.values(entries[i][1])[0].Middle.s142.sensor_id)) {
                                     locationSuggestions.push(Object.values(entries[i][1])[0].Middle.s142.location);
@@ -222,14 +569,14 @@ export const checkTempPromise = () => {
                                 if (suggestions.includes(Object.values(entries[i][1])[0].Middle.s139.sensor_id)) {
                                     locationSuggestions.push(Object.values(entries[i][1])[0].Middle.s139.location);
                                 }
-                                if (suggestions.includes(Object.values(entries[i][1])[0].Right.s136.sensor_id)) {
-                                    locationSuggestions.push(Object.values(entries[i][1])[0].Right.s136.location);
+                                if (suggestions.includes(Object.values(entries[i][1])[0].Sekforde.s136.sensor_id)) {
+                                    locationSuggestions.push(Object.values(entries[i][1])[0].SekForde.s136.location);
                                 }
-                                if (suggestions.includes(Object.values(entries[i][1])[0].Right.s137.sensor_id)) {
-                                    locationSuggestions.push(Object.values(entries[i][1])[0].Right.s137.location);
+                                if (suggestions.includes(Object.values(entries[i][1])[0].Sekforde.s137.sensor_id)) {
+                                    locationSuggestions.push(Object.values(entries[i][1])[0].Sekforde.s137.location);
                                 }
-                                if (suggestions.includes(Object.values(entries[i][1])[0].Right.s138.sensor_id)) {
-                                    locationSuggestions.push(Object.values(entries[i][1])[0].Right.s138.location);
+                                if (suggestions.includes(Object.values(entries[i][1])[0].Sekforde.s138.sensor_id)) {
+                                    locationSuggestions.push(Object.values(entries[i][1])[0].Sekforde.s138.location);
                                 }
                             }
                         }
@@ -291,13 +638,13 @@ export const checkLoudPromise = () => {
             case (workspace === 'UM2'):
                 sensorBeringar = Object.values(sensors.Beringar.UM2)[0].sensor_id;
                 break;
-            case (workspace === 'SecondFloor.Left'):
+            case (workspace === 'SecondFloor.StJames'):
                 sensorBeringar = Object.values(sensors.Beringar.SecondFloor.Office)[0].sensor_id;
                 break;
             case (workspace === 'SecondFloor.Middle'):
                 sensorBeringar = Object.values(sensors.Beringar.SecondFloor.Office)[5].sensor_id;
                 break;
-            case (workspace === 'SecondFloor.Right'):
+            case (workspace === 'SecondFloor.Sekforde'):
                 sensorBeringar = Object.values(sensors.Beringar.SecondFloor.Office)[10].sensor_id;
                 break;
         }
@@ -446,11 +793,11 @@ export const checkNaturalPromise = () => {
                 console.log(locationSuggestions);
                 break;
             case (conditions.Natural === false && conditions.Artificial === true):
-                    if (rec === '2fo') {
-                        resolve(locationSuggestions.push('basement', 'um2', 'lg1', 'lg2', 'lg3', 'lg4'));
-                    } else {
-                        resolve(locationSuggestions.push('2fo-m', 'basement', 'um2', 'lg1', 'lg2', 'lg3', 'lg4'));
-                    }
+                if (rec === '2fo') {
+                    resolve(locationSuggestions.push('basement', 'um2', 'lg1', 'lg2', 'lg3', 'lg4'));
+                } else {
+                    resolve(locationSuggestions.push('2fo-m', 'basement', 'um2', 'lg1', 'lg2', 'lg3', 'lg4'));
+                }
                 console.log(locationSuggestions);
                 break;
         }

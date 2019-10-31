@@ -508,7 +508,7 @@ let s182 = {
 let s129 = {
     sensor_id: 129,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -517,7 +517,7 @@ let s129 = {
 let s128 = {
     sensor_id: 128,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -526,7 +526,7 @@ let s128 = {
 let s127 = {
     sensor_id: 127,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -535,7 +535,7 @@ let s127 = {
 let s126 = {
     sensor_id: 126,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -544,7 +544,7 @@ let s126 = {
 let s125 = {
     sensor_id: 125,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -553,7 +553,7 @@ let s125 = {
 let s124 = {
     sensor_id: 124,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "chair stone",
     working: true,
     natural: true
@@ -940,7 +940,7 @@ let s123 = {
 let s69 = {
     sensor_id: 69,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -949,7 +949,7 @@ let s69 = {
 let s70 = {
     sensor_id: 70,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -958,7 +958,7 @@ let s70 = {
 let s71 = {
     sensor_id: 71,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -967,7 +967,7 @@ let s71 = {
 let s72 = {
     sensor_id: 72,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -976,7 +976,7 @@ let s72 = {
 let s104 = {
     sensor_id: 104,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -985,7 +985,7 @@ let s104 = {
 let s105 = {
     sensor_id: 105,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -994,7 +994,7 @@ let s105 = {
 let s106 = {
     sensor_id: 106,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1003,7 +1003,7 @@ let s106 = {
 let s107 = {
     sensor_id: 107,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1012,7 +1012,7 @@ let s107 = {
 let s108 = {
     sensor_id: 108,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1021,7 +1021,7 @@ let s108 = {
 let s109 = {
     sensor_id: 109,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1030,7 +1030,7 @@ let s109 = {
 let s110 = {
     sensor_id: 110,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1039,7 +1039,7 @@ let s110 = {
 let s111 = {
     sensor_id: 111,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1048,7 +1048,7 @@ let s111 = {
 let s112 = {
     sensor_id: 112,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1057,7 +1057,7 @@ let s112 = {
 let s113 = {
     sensor_id: 113,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1066,7 +1066,7 @@ let s113 = {
 let s114 = {
     sensor_id: 114,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1075,7 +1075,7 @@ let s114 = {
 let s115 = {
     sensor_id: 115,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1084,7 +1084,7 @@ let s115 = {
 let s116 = {
     sensor_id: 116,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1093,7 +1093,7 @@ let s116 = {
 let s117 = {
     sensor_id: 117,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1102,7 +1102,7 @@ let s117 = {
 let s118 = {
     sensor_id: 118,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "chair stone",
     working: true,
     natural: true
@@ -1111,7 +1111,7 @@ let s118 = {
 // let s119 = {
 //     sensor_id: 119,
 //     manufacturer: "spaceti",
-//     location: "2fo-r",
+//     location: "2fo-sek",
 //     type: "chair stone",
 //     working: true
 // };
@@ -1121,7 +1121,7 @@ let s159 = {
     manufacturer: "spaceti",
     location: "lg2",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
@@ -1130,7 +1130,7 @@ let s167 = {
     manufacturer: "spaceti",
     location: "lg3",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
@@ -1139,7 +1139,7 @@ let s168 = {
     manufacturer: "spaceti",
     location: "lg4",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
@@ -1148,7 +1148,7 @@ let s204 = {
     manufacturer: "spaceti",
     location: "um-l",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
@@ -1157,7 +1157,7 @@ let s203 = {
     manufacturer: "spaceti",
     location: "um-r",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
@@ -1166,7 +1166,7 @@ let s178 = {
     manufacturer: "spaceti",
     location: "um1",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
@@ -1175,16 +1175,16 @@ let s187 = {
     manufacturer: "spaceti",
     location: "um2",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
 let s141 = {
     sensor_id: 141,
     manufacturer: "spaceti",
-    location: "2fo-l",
+    location: "2fo-stj",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
@@ -1193,7 +1193,7 @@ let s142 = {
     manufacturer: "spaceti",
     location: "2fo-m",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
@@ -1202,7 +1202,7 @@ let s143 = {
     manufacturer: "spaceti",
     location: "2fo-m",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
@@ -1211,34 +1211,34 @@ let s139 = {
     manufacturer: "spaceti",
     location: "2fo-m",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: false
 };
 
 let s136 = {
     sensor_id: 136,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
 let s137 = {
     sensor_id: 137,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
 let s138 = {
     sensor_id: 138,
     manufacturer: "spaceti",
-    location: "2fo-r",
+    location: "2fo-sek",
     type: "smart stone",
-    working: true,
+    working: false,
     natural: true
 };
 
@@ -1527,7 +1527,7 @@ export const sensors = {
         
             SecondFloor: {
                 Office: { //6 SENSORS
-                    Left: {
+                    StJames: {
                         s129,
                         s128,
                         s127,
@@ -1579,7 +1579,7 @@ export const sensors = {
                         s122,
                         s123,
                     },
-                    Right: {
+                    Sekforde: {
                         s69,
                         s70,
                         s71,
@@ -1602,7 +1602,7 @@ export const sensors = {
                         s119: {
                             sensor_id: 119,
                             manufacturer: "spaceti",
-                            location: "2fo-r",
+                            location: "2fo-sek",
                             type: "chair stone",
                             working: true
                         }
@@ -1645,7 +1645,7 @@ export const sensors = {
         
             SecondFloor: {
                 Office: {
-                    Left: {
+                    StJames: {
                         s141
                     },
                     Middle: {
@@ -1653,7 +1653,7 @@ export const sensors = {
                         s143,
                         s139,
                     },
-                    Right: {
+                    Sekforde: {
                         s136,
                         s137,
                         s138,
@@ -1720,3 +1720,4 @@ export const sensors = {
 }
 
 export const beringarArray = [ b3c2, bd02, bfcc, bc2b, bfd4, b40f, bf31, b2a4, b18e, b010, bed1, bf00, bbde, b4d3, bc3a, b5df, bd19, bf5e, b1fd, b8f9, b64d ]
+export const spacetiArray = [ s159, s167, s168, s204, s203, s178, s187, s141, s142, s143, s139, s136, s137, s138 ]

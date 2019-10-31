@@ -5,7 +5,8 @@ import Navbar from './components/Navbar/navbar';
 import Spinner from './components/Spinner/spinner';
 import Bubbles from './components/Bubbles/bubbles';
 import './App.css';
-import { locationSuggestions } from './api/recommendation';
+
+import { sensors } from './storage/sensors';
 
 require('dotenv').config();
 
@@ -24,10 +25,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    document.getElementById('spinner').hidden = false;
+    setTimeout(() => {document.getElementById('spinner').style.opacity = 1;}, 100);
+    setTimeout(() => {document.getElementById('spinner').style.opacity = 0;}, 2500);
+    setTimeout(() => {document.getElementById('spinner').hidden = true;}, 3000);
+    setTimeout(() => {document.getElementById('spinner').hidden = true;}, 3000);
+    setTimeout(() => {document.getElementById('bubbles').hidden = false;}, 3000);
     switch (true) {
       case this.state.home:
         setTimeout(function () {
           document.getElementById('navbar-home').classList.add('active');
+          document.getElementById('wrapper-recommend').hidden = true;
+          // document.getElementById('wrapper-accessibility').hidden = true;
         }, 1000);
         break;
       case this.state.recommend:
@@ -55,6 +64,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log('component did update');
     //Switch statement to check which page state is false and remove it.
     switch (false) {
       case this.state.home:
@@ -121,6 +131,8 @@ class App extends React.Component {
 
   }
 
+  
+
   changePageState = {
     home: () => {
       this.setState(() => ({
@@ -138,9 +150,9 @@ class App extends React.Component {
       // document.getElementById('wrapper-accessibility').style.opacity = 0;
       // document.getElementById('wrapper-profile').style.opacity = 0;
       document.getElementById('navbar-home').classList.add('active');
-      document.getElementById('navbar-record').classList.remove('active');
+      // document.getElementById('navbar-record').classList.remove('active');
       document.getElementById('navbar-accessibility').classList.remove('active');
-      document.getElementById('navbar-profile').classList.remove('active');
+      // document.getElementById('navbar-profile').classList.remove('active');
       document.getElementById('navbar-recommend').classList.remove('active');
       setTimeout(() => {
         document.getElementById('wrapper-recommend').hidden = true;
@@ -170,9 +182,9 @@ class App extends React.Component {
       // document.getElementById('wrapper-accessibility').style.opacity = 0;
       // document.getElementById('wrapper-profile').style.opacity = 0;
       document.getElementById('navbar-home').classList.remove('active');
-      document.getElementById('navbar-record').classList.remove('active');
+      // document.getElementById('navbar-record').classList.remove('active');
       document.getElementById('navbar-accessibility').classList.remove('active');
-      document.getElementById('navbar-profile').classList.remove('active');
+      // document.getElementById('navbar-profile').classList.remove('active');
       document.getElementById('navbar-recommend').classList.add('active');
       setTimeout(() => {
         document.getElementById('wrapper-home').hidden = true;

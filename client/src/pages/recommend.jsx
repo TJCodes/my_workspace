@@ -6,6 +6,7 @@ import {
     storageCallSpaceti,
     conditions,
     storeRoom,
+    checkWorking,
     calculateRec,
 } from '../api/recommendation';
 
@@ -16,25 +17,35 @@ export const recommend = (props) => (
         <div id="q1" className="row generalMargin">
             <div className="centerText">
                 <h1>Where are you currently working?</h1>
-                <select id="workspace" name="workspace" className="mediumMarginTop">
-                    <option value="LG2">LG2</option>
-                    <option value="LG3">LG3</option>
-                    <option value="LG4">LG4</option>
-                    <option value="UM">Upper Mezz</option>
-                    <option value="UM1">UM1</option>
-                    <option value="UM2">UM2</option>
-                    <option value="SecondFloor.Left">2F Office Space - Left side</option>
-                    <option value="SecondFloor.Middle">2F Office Space - Middle</option>
-                    <option value="SecondFloor.Right">2F Office Space - Right side</option>
+                <select id="workspace" name="workspace" className="mediumMarginTop" onChange={() => { checkWorking(); }}>
+                    <option id="basement" value="Basement">Basement</option>
+                    <option id="lg1" value="LG1">LG1</option>
+                    <option id="lg2" value="LG2">LG2</option>
+                    <option id="lg3" value="LG3">LG3</option>
+                    <option id="lg4" value="LG4">LG4</option>
+                    <option id="cafe" value="Cafe">Cafe</option>
+                    <option id="makerspace" value="Makerspace">Makerspace</option>
+                    <option id="lm" value="LM">LM - Lower Mezz</option>
+                    <option id="um" value="UM">UM - Upper Mezz</option>
+                    <option id="um1" value="UM1">UM1</option>
+                    <option id="um2" value="UM2">UM2</option>
+                    <option id="2fo-l" value="SecondFloor.StJames">2F Office Space - St. James Walk Side</option>
+                    <option id="2fo-m" value="SecondFloor.Middle">2F Office Space - Middle</option>
+                    <option id="2fo-r" value="SecondFloor.Sekforde">2F Office Space - Sekforde St Side</option>
+                    <option id="2fw" value="SecondFloor.Workspace">2F Focus Room</option>
                 </select>
+                <div id="notWorkingDiv" hidden>
+                    <p id="notWorking"></p>
+                </div>
                 <br />
-                <button type="submit" className="btn btn-primary smallMarginTop" onClick={() => { storeRoom(); props.next() }}>submit</button>
+                <button type="submit" id="btn" className="btn btn-primary smallMarginTop" onClick={() => { storeRoom(); props.next() }}>continue</button>
             </div>
         </div>
 
         <div id="q2" className="row generalMargin" hidden>
             <div className="row">
                 <div className="centerText">
+                    <p id="q1text"></p>
                     <h1>Do you want to work somewhere</h1>
                 </div>
             </div>
